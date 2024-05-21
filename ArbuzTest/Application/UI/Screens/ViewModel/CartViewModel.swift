@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  CartViewModel.swift
 //  ArbuzTest
 //
 //  Created by Pokerface on 21.05.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MainViewModel: ObservableObject {
+class CartViewModel: ObservableObject {
     @Published var products: [Product] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?

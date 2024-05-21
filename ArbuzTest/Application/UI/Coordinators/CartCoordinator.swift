@@ -25,8 +25,9 @@ final class CartCoordinator: BaseCoordinator {
     }
     
     private func showCart() {
+        let viewModel = CartViewModel()
         
-        let cartScreen = screenFactory.makeCartScreen()
+        let cartScreen = screenFactory.makeCartScreen(viewModel: viewModel)
         router.setRootModule(cartScreen, hideBar: true)
     }
 }

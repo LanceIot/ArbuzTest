@@ -22,6 +22,10 @@
 		EB7059832BFC30A70077D2CC /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059822BFC30A70077D2CC /* ProductCardView.swift */; };
 		EB7059852BFC30C60077D2CC /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059842BFC30C60077D2CC /* CartView.swift */; };
 		EB70598B2BFC311A0077D2CC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB70598A2BFC311A0077D2CC /* MainViewModel.swift */; };
+		EB7059912BFC35720077D2CC /* CartProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059902BFC35720077D2CC /* CartProductCardView.swift */; };
+		EB7059932BFC35B00077D2CC /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059922BFC35B00077D2CC /* CartViewModel.swift */; };
+		EB7059972BFC35FA0077D2CC /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059962BFC35FA0077D2CC /* APICaller.swift */; };
+		EB70599A2BFC36220077D2CC /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = EB7059992BFC36220077D2CC /* products.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		EB7059822BFC30A70077D2CC /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
 		EB7059842BFC30C60077D2CC /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		EB70598A2BFC311A0077D2CC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		EB7059902BFC35720077D2CC /* CartProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductCardView.swift; sourceTree = "<group>"; };
+		EB7059922BFC35B00077D2CC /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		EB7059962BFC35FA0077D2CC /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		EB7059992BFC36220077D2CC /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 		EB7059492BFC2E4C0077D2CC /* ArbuzTest */ = {
 			isa = PBXGroup;
 			children = (
+				EB7059982BFC360F0077D2CC /* Resources */,
 				EB7059662BFC2F040077D2CC /* DI */,
 				EB7059632BFC2EE80077D2CC /* Application */,
 				EB70595E2BFC2E8C0077D2CC /* Protocols */,
@@ -97,6 +106,7 @@
 		EB7059632BFC2EE80077D2CC /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EB7059952BFC35ED0077D2CC /* Networking */,
 				EB70596D2BFC2F8A0077D2CC /* UI */,
 			);
 			path = Application;
@@ -144,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				EB70598A2BFC311A0077D2CC /* MainViewModel.swift */,
+				EB7059922BFC35B00077D2CC /* CartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -169,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				EB7059842BFC30C60077D2CC /* CartView.swift */,
+				EB7059902BFC35720077D2CC /* CartProductCardView.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -180,6 +192,22 @@
 				EB7059822BFC30A70077D2CC /* ProductCardView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		EB7059952BFC35ED0077D2CC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EB7059962BFC35FA0077D2CC /* APICaller.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		EB7059982BFC360F0077D2CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EB7059992BFC36220077D2CC /* products.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB70599A2BFC36220077D2CC /* products.json in Resources */,
 				EB7059572BFC2E4E0077D2CC /* LaunchScreen.storyboard in Resources */,
 				EB7059542BFC2E4E0077D2CC /* Assets.xcassets in Resources */,
 			);
@@ -253,10 +282,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB7059692BFC2F220077D2CC /* DI.swift in Sources */,
+				EB7059912BFC35720077D2CC /* CartProductCardView.swift in Sources */,
 				EB7059752BFC30010077D2CC /* MainCoordinator.swift in Sources */,
 				EB70597C2BFC30490077D2CC /* Product.swift in Sources */,
 				EB70598B2BFC311A0077D2CC /* MainViewModel.swift in Sources */,
 				EB7059812BFC307F0077D2CC /* MainView.swift in Sources */,
+				EB7059932BFC35B00077D2CC /* CartViewModel.swift in Sources */,
+				EB7059972BFC35FA0077D2CC /* APICaller.swift in Sources */,
 				EB7059602BFC2EA60077D2CC /* Router.swift in Sources */,
 				EB7059712BFC2FB70077D2CC /* AppCoordinator.swift in Sources */,
 				EB70594B2BFC2E4C0077D2CC /* AppDelegate.swift in Sources */,

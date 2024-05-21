@@ -1,0 +1,47 @@
+[
+    {
+        "id": "6f7f6e29-63a8-4e5d-9e3f-43fdda12d289",
+        "name": "Apple",
+        "price": 1225,
+        "isFavorite": true,
+        "isKilo": true,
+        "minCount": 1,
+        "maxCount": 10,
+        "imageUrl": "png",
+        "description": "Fresh red apples"
+    },
+    {
+        "id": "8f8f7d30-77a8-4e6d-9a3f-53fdda12d291",
+        "name": "Banana",
+        "price": 999,
+        "isFavorite": false,
+        "isKilo": true,
+        "minCount": 1,
+        "maxCount": 7,
+        "imageUrl": "png",
+        "description": "Yellow bananas"
+    },
+    {
+        "id": "6f7f6e29-53a8-4e4d-9e3f-43fdda12d289",
+        "name": "Nescafe",
+        "price": 1225,
+        "isFavorite": false,
+        "isKilo": false,
+        "minCount": 1,
+        "maxCount": 20,
+        "imageUrl": "png",
+        "description": "Nescafe Gold"
+    },
+    {
+        "id": "8f8f7d30-77a8-4e6d-9a3f-53fdda12d653",
+        "name": "Fairy",
+        "price": 1885,
+        "isFavorite": false,
+        "isKilo": false,
+        "minCount": 1,
+        "maxCount": 15,
+        "imageUrl": "png",
+        "description": "To do the dishes"
+    }
+]
+

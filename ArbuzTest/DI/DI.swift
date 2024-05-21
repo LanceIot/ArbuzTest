@@ -39,7 +39,7 @@ extension Di: AppFactory {
 
 protocol ScreenFactory {
     func makeMainScreen(viewModel: MainViewModel) -> UIHostingController<MainView>
-    func makeCartScreen() -> UIHostingController<CartView>
+    func makeCartScreen(viewModel: CartViewModel) -> UIHostingController<CartView>
 }
 
 final class ScreenFactoryImpl: ScreenFactory {
@@ -49,8 +49,8 @@ final class ScreenFactoryImpl: ScreenFactory {
         return UIHostingController(rootView: mainView)
     }
     
-    func makeCartScreen() -> UIHostingController<CartView> {
-        let cartView = CartView()
+    func makeCartScreen(viewModel: CartViewModel) -> UIHostingController<CartView> {
+        let cartView = CartView(viewModel: viewModel)
         return UIHostingController(rootView: cartView)
     }
 }
