@@ -8,7 +8,7 @@
 import Foundation
 
 struct Product: Identifiable, Codable {
-    var id: UUID
+    var id = UUID()
     var name: String
     var price: Int
     var isFavorite: Bool
@@ -17,4 +17,4 @@ struct Product: Identifiable, Codable {
     var maxCount: Int
     var imageUrl: String
     var description: String
-}
+}   

@@ -26,8 +26,20 @@ final class MainCoordinator: BaseCoordinator {
     
     private func showMain() {
         let viewModel = MainViewModel()
-        
+        viewModel.onSelectProduct = { [weak self] id in
+            DispatchQueue.main.async {
+                self?.openDetails(id: id)
+            }
+        }
         let mainScreen = screenFactory.makeMainScreen(viewModel: viewModel)
         router.setRootModule(mainScreen, hideBar: true)
+    }
+    
+    private func openDetails(id: UUID) {
+        let viewModel = DetailViewModel(id: id)
+        let detailView = screenFactory.makeDetailScreen(viewModel: viewModel)
+        DispatchQueue.main.async { [weak self] in
+            self?.router.present(detailView, animated: true)
+        }
     }
 }

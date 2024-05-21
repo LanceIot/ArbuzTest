@@ -8,11 +8,15 @@
 import SwiftUI
 
 class MainViewModel: ObservableObject {
+        
+    var onSelectProduct: ((UUID) -> ())?
+        
     @Published var products: [Product] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
     func loadProducts() {
+        self.isLoading = true
         Task {
             do {
                 let loadedProducts = try await APICaller.shared.loadProducts()
@@ -27,5 +31,9 @@ class MainViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func openProduct(with id: UUID) {
+        onSelectProduct?(id)
     }
 }

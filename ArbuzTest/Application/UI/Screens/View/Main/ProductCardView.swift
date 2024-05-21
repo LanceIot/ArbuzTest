@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductCardView: View {
     
     @State var product: Product
-    @State private var count: Int = 2
+    @State private var count: Int = 0
     
     private let screenSize = UIScreen.main.bounds.size
     

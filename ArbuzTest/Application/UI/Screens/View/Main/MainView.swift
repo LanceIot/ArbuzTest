@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject private var viewModel = MainViewModel()
+    @StateObject var viewModel: MainViewModel
         
     let hLayout = [GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.5), spacing: UIScreen.main.bounds.width * 0.05)]
     let vLayout = [GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.2), spacing: UIScreen.main.bounds.width * 0.05)]
@@ -33,6 +33,10 @@ struct MainView: View {
                                 LazyHGrid(rows: hLayout, spacing: UIScreen.main.bounds.width * 0.002) {
                                     ForEach(viewModel.products) { product in
                                         ProductCardView(product: product)
+                                            .onTapGesture {
+                                                print("Opened details with \(product.id)")
+                                                viewModel.onSelectProduct?(product.id)
+                                            }
                                     }
                                 }
                                 .padding(.horizontal)
@@ -64,6 +68,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    MainView(viewModel: MainViewModel())
 }
 
