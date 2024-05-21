@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @StateObject var viewModel: MainViewModel
-        
+    
     let hLayout = [GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.5), spacing: UIScreen.main.bounds.width * 0.05)]
     let vLayout = [GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.2), spacing: UIScreen.main.bounds.width * 0.05)]
     
@@ -25,6 +25,7 @@ struct MainView: View {
                         .foregroundColor(.red)
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
+                        
                         Section(header:
                                     Text("Popular")
                             .font(.system(size: 18, weight: .bold))
@@ -34,7 +35,6 @@ struct MainView: View {
                                     ForEach(viewModel.products) { product in
                                         ProductCardView(product: product)
                                             .onTapGesture {
-                                                print("Opened details with \(product.id)")
                                                 viewModel.onSelectProduct?(product.id)
                                             }
                                     }
@@ -52,13 +52,15 @@ struct MainView: View {
                                 LazyVGrid(columns: vLayout, spacing: UIScreen.main.bounds.width * 0.05) {
                                     ForEach(viewModel.products) { product in
                                         ProductCardView(product: product)
+                                            .onTapGesture {
+                                                viewModel.onSelectProduct?(product.id)
+                                            }
                                     }
                                 }
                                 .padding()
                             }
                         }
                     }
-                    
                 }
             }
             .onAppear(perform: viewModel.loadProducts)

@@ -15,13 +15,15 @@ class CartViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
-    func getCartProducts() {
+    func getCartProducts(completion: @escaping () -> ()) {
         CartManager.shared.getAllProducts(completion: { result in
             switch result {
             case .success(let products):
                 self.cartProducts = products
+                completion()
             case .failure(let error):
                 self.errorMessage = error.localizedDescription
+                completion()
             }
         })
     }

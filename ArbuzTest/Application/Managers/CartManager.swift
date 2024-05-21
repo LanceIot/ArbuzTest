@@ -11,10 +11,9 @@ class CartManager {
     static let shared = CartManager()
     private let db = Firestore.firestore()
     private let cartCollection = "cart"
-
+    
     private init() {}
-
-    // Метод для добавления нового продукта в корзину
+    
     func addProductToCart(product: Product, completion: @escaping (Result<Void, Error>) -> Void) {
         let cartRef = db.collection(cartCollection)
         do {
@@ -29,8 +28,7 @@ class CartManager {
             completion(.failure(error))
         }
     }
-
-    // Метод для изменения количества продукта в корзине
+    
     func updateProductCount(product: Product, newCount: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         let cartRef = db.collection(cartCollection)
         let documentRef = cartRef.document(product.id.uuidString)
@@ -53,8 +51,7 @@ class CartManager {
             }
         }
     }
-
-    // Метод для удаления продукта из корзины
+    
     func removeProductFromCart(productID: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
         let cartRef = db.collection(cartCollection)
         cartRef.document(productID.uuidString).delete { error in
@@ -65,8 +62,7 @@ class CartManager {
             }
         }
     }
-
-    // Метод для получения всех продуктов в корзине
+    
     func getAllProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
         let cartRef = db.collection(cartCollection)
         cartRef.getDocuments { snapshot, error in
@@ -82,5 +78,65 @@ class CartManager {
             }
         }
     }
+    
+    func getProductCount(productID: UUID, completion: @escaping (Result<Int, Error>) -> Void) {
+        let cartRef = db.collection(cartCollection)
+        let documentRef = cartRef.document(productID.uuidString)
+        
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let document = document, document.exists {
+                if let count = document.get("count") as? Int {
+                    completion(.success(count))
+                } else {
+                    completion(.failure(NSError(domain: "Product count not found", code: 404, userInfo: nil)))
+                }
+            } else {
+                completion(.failure(NSError(domain: "Product not found", code: 404, userInfo: nil)))
+            }
+        }
+    }
+    
+    func checkIsFavorite(productID: UUID, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let cartRef = db.collection(cartCollection)
+        let documentRef = cartRef.document(productID.uuidString)
+        
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let document = document, document.exists {
+                if let isFavorite = document.get("isFavorite") as? Bool {
+                    completion(.success(isFavorite))
+                } else {
+                    completion(.failure(NSError(domain: "Cant check isFavorite", code: 404, userInfo: nil)))
+                }
+            } else {
+                completion(.failure(NSError(domain: "Product not found", code: 404, userInfo: nil)))
+            }
+        }
+    }
+    
+    func updateProductIsFavorite(productID: UUID, isFavorite: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+            let cartRef = db.collection(cartCollection)
+            let documentRef = cartRef.document(productID.uuidString)
+            
+            documentRef.getDocument { document, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let document = document, document.exists {
+                    documentRef.updateData(["isFavorite": isFavorite]) { error in
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }
+                } else {
+                    completion(.failure(NSError(domain: "Product not found", code: 404, userInfo: nil)))
+                }
+            }
+        }
+    
 }
 

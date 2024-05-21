@@ -28,6 +28,14 @@ struct ProductCardView: View {
                 Image(systemName: product.isFavorite ? "heart.fill" : "heart")
                     .onTapGesture {
                         product.isFavorite.toggle()
+                        CartManager.shared.updateProductIsFavorite(productID: product.id, isFavorite: product.isFavorite) { result in
+                            switch result {
+                            case .success():
+                                print("Product isFavorite updated successfully")
+                            case .failure(let error):
+                                print("Error updating product isFavorite: \(error.localizedDescription)")
+                            }
+                        }
                     }
                     .foregroundColor(product.isFavorite ? .red : .black)
                     .padding(10),
@@ -118,6 +126,25 @@ struct ProductCardView: View {
         }
         .frame(width: screenSize.width * 0.3, height: screenSize.height * 0.3)
         .padding(screenSize.width * 0.01)
+        .onAppear {
+            CartManager.shared.getProductCount(productID: product.id) { result in
+                switch result {
+                case .success(let fetchedCount):
+                    count = fetchedCount
+                case .failure(let error):
+                    print("Error fetching product count: \(error.localizedDescription)")
+                }
+            }
+            
+            CartManager.shared.checkIsFavorite(productID: product.id) { result in
+                switch result {
+                case .success(let isFavorite):
+                    product.isFavorite = isFavorite
+                case .failure(let error):
+                    print("Error fetching product isFavorite: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
 

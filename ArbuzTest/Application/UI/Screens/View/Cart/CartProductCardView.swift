@@ -10,6 +10,8 @@ import CoreData
 
 struct CartProductCardView: View {
     
+    var removedCell: () -> Void
+    
     @State var product: Product
     @State private var count: Int = 1
     
@@ -29,6 +31,14 @@ struct CartProductCardView: View {
                 Image(systemName: product.isFavorite ? "heart.fill": "heart")
                     .onTapGesture {
                         product.isFavorite.toggle()
+                        CartManager.shared.updateProductIsFavorite(productID: product.id, isFavorite: product.isFavorite) { result in
+                            switch result {
+                            case .success():
+                                print("Product isFavorite updated successfully")
+                            case .failure(let error):
+                                print("Error updating product isFavorite: \(error.localizedDescription)")
+                            }
+                        }
                     }
                     .foregroundColor(product.isFavorite ? .red : .black)
                     .padding(5),
@@ -71,6 +81,7 @@ struct CartProductCardView: View {
                                     switch result {
                                     case .success():
                                         print("Product removed from cart successfully")
+                                        removedCell()
                                     case .failure(let error):
                                         print("Error removing product from cart: \(error.localizedDescription)")
                                     }
@@ -140,6 +151,7 @@ struct CartProductCardView: View {
                         switch result {
                         case .success():
                             print("Product removed from cart successfully")
+                            removedCell()
                         case .failure(let error):
                             print("Error removing product from cart: \(error.localizedDescription)")
                         }
@@ -149,12 +161,30 @@ struct CartProductCardView: View {
                 .padding(10),
             alignment: .topTrailing
         )
-//        .background(Color.gray)
+        .onAppear {
+            CartManager.shared.getProductCount(productID: product.id) { result in
+                switch result {
+                case .success(let fetchedCount):
+                    count = fetchedCount
+                case .failure(let error):
+                    print("Error fetching product count: \(error.localizedDescription)")
+                }
+            }
+            
+            CartManager.shared.checkIsFavorite(productID: product.id) { result in
+                switch result {
+                case .success(let isFavorite):
+                    product.isFavorite = isFavorite
+                case .failure(let error):
+                    print("Error fetching product isFavorite: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    CartProductCardView(product: Product(
+    CartProductCardView(removedCell: {}, product: Product(
         id: UUID(),
         name: "Огурцы Рава Степногорск кг",
         price: 2444,

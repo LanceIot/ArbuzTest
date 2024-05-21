@@ -11,8 +11,8 @@ struct CartView: View {
     
     @StateObject var viewModel: CartViewModel
     
-    var totalCost: Int = 256
-    
+    @State private var totalCost: Int = 0
+
     var body: some View {
         NavigationView {
             VStack {
@@ -23,9 +23,12 @@ struct CartView: View {
                         Text("Error: \(errorMessage)")
                             .foregroundColor(.red)
                         Button(action: {
-                            viewModel.getCartProducts()
+                            viewModel.getCartProducts() {
+                                updateTotalCost()
+                            }
                         }, label: {
                             Text("Retry")
+                                .padding()
                         })
                         .background(Color(UIColor.systemGray5))
                         .cornerRadius(10)
@@ -48,7 +51,11 @@ struct CartView: View {
                         
                         LazyVStack {
                             ForEach(viewModel.cartProducts) { product in
-                                CartProductCardView(product: product)
+                                CartProductCardView(removedCell: {
+                                    viewModel.getCartProducts {
+                                        updateTotalCost()
+                                    }
+                                }, product: product)
                                 Divider()
                             }
                         }
@@ -60,11 +67,11 @@ struct CartView: View {
                                 .foregroundColor(.white)
                             Text("\(totalCost) ₸")
                         }
-                            .frame(maxWidth: .infinity, maxHeight: 60)
-                            .background(Color(UIColor.systemGreen).opacity(0.9))
-                            .cornerRadius(15)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 25),
+                        .frame(maxWidth: .infinity, maxHeight: 60)
+                        .background(Color(UIColor.systemGreen).opacity(0.9))
+                        .cornerRadius(15)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 25),
                         alignment: .bottom
                     )
                 }
@@ -72,19 +79,16 @@ struct CartView: View {
             .padding(5)
             .navigationTitle("Корзина")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                print("Кнопка Очистить pressed")
-            }) {
-                Text("Очистить")
-                    .font(.system(size: 14))
-                    .foregroundColor(Color(UIColor.systemGray2))
-            }
-            )
         }
-        .onAppear(perform: {
-            viewModel.getCartProducts()
-        })
+        .onAppear(){
+            viewModel.getCartProducts {
+                updateTotalCost()
+            }
+        }
+    }
+    
+    private func updateTotalCost() {
+        totalCost = viewModel.cartProducts.reduce(0) { $0 + $1.price * $1.count }
     }
 }
 

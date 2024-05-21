@@ -56,12 +56,9 @@ struct DetailView: View {
             .navigationBarItems(
                 leading:
                     Button(action: {
-                        print("Button Close pressed")
+                        viewModel.dismissView()
                     }) {
                         Image(systemName: "xmark")
-                            .onTapGesture {
-                                
-                            }
                             .foregroundColor(.black)
                             .font(.system(size: 20))
                     },
@@ -73,13 +70,42 @@ struct DetailView: View {
                         Image(systemName: viewModel.product.isFavorite ? "heart.fill": "heart")
                             .onTapGesture {
                                 viewModel.product.isFavorite.toggle()
+                                CartManager.shared.updateProductIsFavorite(productID: viewModel.product.id, isFavorite: viewModel.product.isFavorite) { result in
+                                    switch result {
+                                    case .success():
+                                        print("Product isFavorite updated successfully")
+                                    case .failure(let error):
+                                        print("Error updating product isFavorite: \(error.localizedDescription)")
+                                    }
+                                }
                             }
                             .foregroundColor(viewModel.product.isFavorite ? .red : .black)
                             .font(.system(size: 22))
                     })
         }
         .onAppear() {
-            viewModel.loadProduct()
+            viewModel.loadProduct { isFinished in
+                if isFinished {
+                    CartManager.shared.getProductCount(productID: viewModel.product.id) { result in
+                        switch result {
+                        case .success(let fetchedCount):
+                            count = fetchedCount
+                        case .failure(let error):
+                            print("Error fetching product count: \(error.localizedDescription)")
+                        }
+                    }
+                    
+                    CartManager.shared.checkIsFavorite(productID: viewModel.product.id) { result in
+                        switch result {
+                        case .success(let isFavorite):
+                            viewModel.product.isFavorite = isFavorite
+                        case .failure(let error):
+                            print("Error fetching product isFavorite: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+            
         }
         .overlay(
             HStack {
@@ -87,6 +113,14 @@ struct DetailView: View {
                     Button(action: {
                         if count >= 1 {
                             count -= 1
+                            CartManager.shared.updateProductCount(product: viewModel.product, newCount: count) { result in
+                                switch result {
+                                case .success():
+                                    print("Product count updated successfully")
+                                case .failure(let error):
+                                    print("Error updating product count: \(error.localizedDescription)")
+                                }
+                            }
                         }
                     }, label: {
                         Image(systemName: "minus")
@@ -114,6 +148,14 @@ struct DetailView: View {
                 Button(action: {
                     if count < viewModel.product.maxCount {
                         count += 1
+                        CartManager.shared.updateProductCount(product: viewModel.product, newCount: count) { result in
+                            switch result {
+                            case .success():
+                                print("Product count updated successfully")
+                            case .failure(let error):
+                                print("Error updating product count: \(error.localizedDescription)")
+                            }
+                        }
                     } else {
                         print("Maximum count of \(viewModel.product.name)")
                     }

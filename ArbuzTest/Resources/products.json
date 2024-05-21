@@ -3,7 +3,7 @@
         "id": "6f7f6e29-63a8-4e5d-9e3f-43fdda12d289",
         "name": "Apple",
         "price": 1225,
-        "isFavorite": true,
+        "isFavorite": false,
         "isKilo": true,
         "count": 0,
         "minCount": 1,
