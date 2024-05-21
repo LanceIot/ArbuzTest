@@ -23,7 +23,7 @@ struct CartView: View {
                         Text("Error: \(errorMessage)")
                             .foregroundColor(.red)
                         Button(action: {
-                            viewModel.loadProducts()
+                            viewModel.getCartProducts()
                         }, label: {
                             Text("Retry")
                         })
@@ -47,7 +47,7 @@ struct CartView: View {
                         }
                         
                         LazyVStack {
-                            ForEach(viewModel.products) { product in
+                            ForEach(viewModel.cartProducts) { product in
                                 CartProductCardView(product: product)
                                 Divider()
                             }
@@ -83,7 +83,7 @@ struct CartView: View {
             )
         }
         .onAppear(perform: {
-            viewModel.loadProducts()
+            viewModel.getCartProducts()
         })
     }
 }

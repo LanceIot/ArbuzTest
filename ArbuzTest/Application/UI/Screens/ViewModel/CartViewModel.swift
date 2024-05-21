@@ -6,26 +6,23 @@
 //
 
 import SwiftUI
+import CoreData
 
 class CartViewModel: ObservableObject {
-    @Published var products: [Product] = []
+        
+    @Published var cartProducts: [Product] = []
+    
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
-    func loadProducts() {
-        Task {
-            do {
-                let loadedProducts = try await APICaller.shared.loadProducts()
-                DispatchQueue.main.async {
-                    self.products = loadedProducts
-                    self.isLoading = false
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.errorMessage = error.localizedDescription
-                    self.isLoading = false
-                }
+    func getCartProducts() {
+        CartManager.shared.getAllProducts(completion: { result in
+            switch result {
+            case .success(let products):
+                self.cartProducts = products
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
             }
-        }
+        })
     }
 }

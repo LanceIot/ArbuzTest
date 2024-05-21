@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB0F92C82BFCFD1B00A2AA5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0F92C72BFCFD1B00A2AA5C /* GoogleService-Info.plist */; };
 		EB5117412BFC3EF50086FF51 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5117402BFC3EF50086FF51 /* DetailView.swift */; };
 		EB5117432BFC3F4A0086FF51 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5117422BFC3F4A0086FF51 /* DetailViewModel.swift */; };
 		EB70594B2BFC2E4C0077D2CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB70594A2BFC2E4C0077D2CC /* AppDelegate.swift */; };
@@ -28,9 +29,14 @@
 		EB7059932BFC35B00077D2CC /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059922BFC35B00077D2CC /* CartViewModel.swift */; };
 		EB7059972BFC35FA0077D2CC /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7059962BFC35FA0077D2CC /* APICaller.swift */; };
 		EB70599A2BFC36220077D2CC /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = EB7059992BFC36220077D2CC /* products.json */; };
+		EB924C3E2BFCF5AD00B6A9ED /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB924C3D2BFCF5AD00B6A9ED /* CartManager.swift */; };
+		FB34B0B33BBF837277367442 /* Pods_ArbuzTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91FD6A65F0E6307BCD484DB /* Pods_ArbuzTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		552FF9D515186E539ECDFB2D /* Pods-ArbuzTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArbuzTest.debug.xcconfig"; path = "Target Support Files/Pods-ArbuzTest/Pods-ArbuzTest.debug.xcconfig"; sourceTree = "<group>"; };
+		E91FD6A65F0E6307BCD484DB /* Pods_ArbuzTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArbuzTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0F92C72BFCFD1B00A2AA5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB5117402BFC3EF50086FF51 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EB5117422BFC3F4A0086FF51 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		EB7059472BFC2E4C0077D2CC /* ArbuzTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArbuzTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +60,8 @@
 		EB7059922BFC35B00077D2CC /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		EB7059962BFC35FA0077D2CC /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		EB7059992BFC36220077D2CC /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		EB924C3D2BFCF5AD00B6A9ED /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		EEC8B05254A402CC1DAFBDF1 /* Pods-ArbuzTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArbuzTest.release.xcconfig"; path = "Target Support Files/Pods-ArbuzTest/Pods-ArbuzTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,12 +69,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB34B0B33BBF837277367442 /* Pods_ArbuzTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32BC82AF5BCB6020B4B2001E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				552FF9D515186E539ECDFB2D /* Pods-ArbuzTest.debug.xcconfig */,
+				EEC8B05254A402CC1DAFBDF1 /* Pods-ArbuzTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		77E0080F365C1AD20C9576B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E91FD6A65F0E6307BCD484DB /* Pods_ArbuzTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EB51173F2BFC3EDD0086FF51 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +106,8 @@
 			children = (
 				EB7059492BFC2E4C0077D2CC /* ArbuzTest */,
 				EB7059482BFC2E4C0077D2CC /* Products */,
+				32BC82AF5BCB6020B4B2001E /* Pods */,
+				77E0080F365C1AD20C9576B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +129,7 @@
 				EB70594A2BFC2E4C0077D2CC /* AppDelegate.swift */,
 				EB7059532BFC2E4E0077D2CC /* Assets.xcassets */,
 				EB7059552BFC2E4E0077D2CC /* LaunchScreen.storyboard */,
+				EB0F92C72BFCFD1B00A2AA5C /* GoogleService-Info.plist */,
 				EB7059582BFC2E4E0077D2CC /* Info.plist */,
 			);
 			path = ArbuzTest;
@@ -118,6 +147,7 @@
 		EB7059632BFC2EE80077D2CC /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EB924C3C2BFCF59E00B6A9ED /* Managers */,
 				EB7059952BFC35ED0077D2CC /* Networking */,
 				EB70596D2BFC2F8A0077D2CC /* UI */,
 			);
@@ -224,6 +254,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		EB924C3C2BFCF59E00B6A9ED /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EB924C3D2BFCF5AD00B6A9ED /* CartManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,9 +269,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB70595B2BFC2E4E0077D2CC /* Build configuration list for PBXNativeTarget "ArbuzTest" */;
 			buildPhases = (
+				C5118320FC16C76870495986 /* [CP] Check Pods Manifest.lock */,
 				EB7059432BFC2E4C0077D2CC /* Sources */,
 				EB7059442BFC2E4C0077D2CC /* Frameworks */,
 				EB7059452BFC2E4C0077D2CC /* Resources */,
+				C992C7ACB33B98B7BF74B195 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -283,12 +323,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB70599A2BFC36220077D2CC /* products.json in Resources */,
+				EB0F92C82BFCFD1B00A2AA5C /* GoogleService-Info.plist in Resources */,
 				EB7059572BFC2E4E0077D2CC /* LaunchScreen.storyboard in Resources */,
 				EB7059542BFC2E4E0077D2CC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C5118320FC16C76870495986 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArbuzTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C992C7ACB33B98B7BF74B195 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArbuzTest/Pods-ArbuzTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArbuzTest/Pods-ArbuzTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArbuzTest/Pods-ArbuzTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB7059432BFC2E4C0077D2CC /* Sources */ = {
@@ -310,6 +393,7 @@
 				EB70594B2BFC2E4C0077D2CC /* AppDelegate.swift in Sources */,
 				EB7059732BFC2FEB0077D2CC /* TabCoordinator.swift in Sources */,
 				EB7059772BFC30190077D2CC /* CartCoordinator.swift in Sources */,
+				EB924C3E2BFCF5AD00B6A9ED /* CartManager.swift in Sources */,
 				EB7059832BFC30A70077D2CC /* ProductCardView.swift in Sources */,
 				EB7059852BFC30C60077D2CC /* CartView.swift in Sources */,
 				EB7059622BFC2EDA0077D2CC /* Coordinator.swift in Sources */,
@@ -451,12 +535,14 @@
 		};
 		EB70595C2BFC2E4E0077D2CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 552FF9D515186E539ECDFB2D /* Pods-ArbuzTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DPGV5HT52T;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArbuzTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,12 +565,14 @@
 		};
 		EB70595D2BFC2E4E0077D2CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEC8B05254A402CC1DAFBDF1 /* Pods-ArbuzTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DPGV5HT52T;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArbuzTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

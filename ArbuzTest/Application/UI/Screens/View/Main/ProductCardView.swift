@@ -25,7 +25,7 @@ struct ProductCardView: View {
             .background(Color(UIColor.systemGray5))
             .cornerRadius(10)
             .overlay(
-                Image(systemName: product.isFavorite ? "heart.fill": "heart")
+                Image(systemName: product.isFavorite ? "heart.fill" : "heart")
                     .onTapGesture {
                         product.isFavorite.toggle()
                     }
@@ -45,6 +45,14 @@ struct ProductCardView: View {
                     Button(action: {
                         if count > 0 {
                             count -= 1
+                            CartManager.shared.updateProductCount(product: product, newCount: count) { result in
+                                switch result {
+                                case .success():
+                                    print("Product count updated successfully")
+                                case .failure(let error):
+                                    print("Error updating product count: \(error.localizedDescription)")
+                                }
+                            }
                         }
                     }) {
                         Image(systemName: "minus")
@@ -61,6 +69,14 @@ struct ProductCardView: View {
                     Button(action: {
                         if count < product.maxCount {
                             count += 1
+                            CartManager.shared.updateProductCount(product: product, newCount: count) { result in
+                                switch result {
+                                case .success():
+                                    print("Product count updated successfully")
+                                case .failure(let error):
+                                    print("Error updating product count: \(error.localizedDescription)")
+                                }
+                            }
                         } else {
                             print("Maximum count of \(product.name)")
                         }
@@ -79,17 +95,25 @@ struct ProductCardView: View {
                     Text("\(product.price) ₸")
                         .font(.system(size: 14, weight: .medium))
                     Spacer()
-                    Image(systemName: "plus")
-                        .foregroundColor(.green)
+                    Button(action: {
+                        count += 1
+                        CartManager.shared.addProductToCart(product: product) { result in
+                            switch result {
+                            case .success():
+                                print("Product added to cart successfully")
+                            case .failure(let error):
+                                print("Error adding product to cart: \(error.localizedDescription)")
+                            }
+                        }
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.green)
+                    }
                 }
                 .padding(10)
                 .frame(maxWidth: .infinity, maxHeight: screenSize.height * 0.04)
                 .background(Color(UIColor.systemGray5))
                 .cornerRadius(screenSize.height * 0.04)
-                .onTapGesture {
-                    print("\(count)")
-                    count+=1
-                }
             }
         }
         .frame(width: screenSize.width * 0.3, height: screenSize.height * 0.3)
@@ -97,18 +121,28 @@ struct ProductCardView: View {
     }
 }
 
-#Preview {
-    ProductCardView(product: Product(
-            id: UUID(),
-            name: "Огурцы Рава Степногорск кг",
-            price: 2444,
-            isFavorite: false,
-            isKilo: true,
-            minCount: 1,
-            maxCount: 20,
-            imageUrl: "png",
-            description: "Огурцы обладают определенными лечебными свойствами: повышают аппетит, способствуют хорошему усвоению пищи."
-        )
-    )
+struct ContentView: View {
+    @State private var products: [Product] = []
+    
+    var body: some View {
+        VStack {
+            ForEach(products) { product in
+                ProductCardView(product: product)
+            }
+        }
+        .onAppear {
+            CartManager.shared.getAllProducts { result in
+                switch result {
+                case .success(let fetchedProducts):
+                    products = fetchedProducts
+                case .failure(let error):
+                    print("Error fetching products: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }
 
+#Preview {
+    ContentView()
+}

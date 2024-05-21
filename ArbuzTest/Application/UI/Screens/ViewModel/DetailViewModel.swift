@@ -16,7 +16,7 @@ class DetailViewModel: ObservableObject {
     
     init(id: UUID) {
         self.productID = id
-        product = Product(id: UUID(), name: "", price: 0, isFavorite: false, isKilo: false, minCount: 1, maxCount: 10, imageUrl: "", description: "")
+        product = Product(id: UUID(), name: "", price: 0, isFavorite: false, isKilo: false, count: 0, minCount: 1, maxCount: 10, imageUrl: "", description: "")
     }
     
     func loadProduct() {

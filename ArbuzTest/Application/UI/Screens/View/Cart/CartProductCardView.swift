@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CartProductCardView: View {
     
@@ -34,7 +35,7 @@ struct CartProductCardView: View {
                 alignment: .topTrailing
             )
             VStack(alignment: .leading) {
-                Text("\(product.name)")
+                Text(product.name)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.trailing, screenSize.width * 0.06)
                     .font(.system(size: 14))
@@ -48,6 +49,14 @@ struct CartProductCardView: View {
                             Button(action: {
                                 if count > 1 {
                                     count -= 1
+                                    CartManager.shared.updateProductCount(product: product, newCount: count) { result in
+                                        switch result {
+                                        case .success():
+                                            print("Product count updated successfully")
+                                        case .failure(let error):
+                                            print("Error updating product count: \(error.localizedDescription)")
+                                        }
+                                    }
                                 }
                             }) {
                                 Image(systemName: "minus")
@@ -58,7 +67,14 @@ struct CartProductCardView: View {
                             .padding(.leading, screenSize.width * 0.02)
                         } else {
                             Button(action: {
-                                
+                                CartManager.shared.removeProductFromCart(productID: product.id) { result in
+                                    switch result {
+                                    case .success():
+                                        print("Product removed from cart successfully")
+                                    case .failure(let error):
+                                        print("Error removing product from cart: \(error.localizedDescription)")
+                                    }
+                                }
                             }) {
                                 Image(systemName: "trash")
                                     .font(.system(size: 16, weight: .regular))
@@ -82,6 +98,14 @@ struct CartProductCardView: View {
                         Button(action: {
                             if count < product.maxCount {
                                 count += 1
+                                CartManager.shared.updateProductCount(product: product, newCount: count) { result in
+                                    switch result {
+                                    case .success():
+                                        print("Product count updated successfully")
+                                    case .failure(let error):
+                                        print("Error updating product count: \(error.localizedDescription)")
+                                    }
+                                }
                             } else {
                                 print("Maximum count of \(product.name)")
                             }
@@ -101,7 +125,7 @@ struct CartProductCardView: View {
                     
                     Spacer()
                     
-                    Text("\(product.price * count) ₸")
+                    Text("\(Int(product.price) * count) ₸")
                         .font(.system(size: 18, weight: .bold))
                 }
             }
@@ -111,6 +135,16 @@ struct CartProductCardView: View {
         .padding(.vertical, screenSize.height * 0.01)
         .overlay(
             Image(systemName: "xmark")
+                .onTapGesture {
+                    CartManager.shared.removeProductFromCart(productID: product.id) { result in
+                        switch result {
+                        case .success():
+                            print("Product removed from cart successfully")
+                        case .failure(let error):
+                            print("Error removing product from cart: \(error.localizedDescription)")
+                        }
+                    }
+                }
                 .foregroundColor(Color(UIColor.systemGray5))
                 .padding(10),
             alignment: .topTrailing
@@ -121,15 +155,16 @@ struct CartProductCardView: View {
 
 #Preview {
     CartProductCardView(product: Product(
-            id: UUID(),
-            name: "Огурцы Рава Степногорск кг",
-            price: 2444,
-            isFavorite: false,
-            isKilo: true,
-            minCount: 1,
-            maxCount: 20,
-            imageUrl: "png",
-            description: "Огурцы обладают определенными лечебными свойствами: повышают аппетит, способствуют хорошему усвоению пищи."
-        )
-    )
+        id: UUID(),
+        name: "Огурцы Рава Степногорск кг",
+        price: 2444,
+        isFavorite: false,
+        isKilo: true,
+        count: 0,
+        minCount: 1,
+        maxCount: 20,
+        imageUrl: "png",
+        description: "Огурцы обладают определенными лечебными свойствами: повышают аппетит, способствуют хорошему усвоению пищи."
+    )) 
 }
+
